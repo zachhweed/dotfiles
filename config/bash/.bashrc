@@ -1,5 +1,7 @@
 export EDITOR='vim'
 
+mkdir -p ~/Development
+
 alias tmux="TERM=screen-256color-bce tmux"
 
 # Ruby aliases
