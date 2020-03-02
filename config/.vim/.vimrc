@@ -88,6 +88,8 @@ nnoremap <leader>S :call SplitWorkspaceFromCurrent()<CR>
 nnoremap <leader>+ :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
 nnoremap <leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
 if executable('ag')
   let g:ackprg = 'ag --nogroup --nocolor --column'
 endif

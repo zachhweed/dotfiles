@@ -78,4 +78,8 @@ function build_pr_template() {
   cat ~/checklist.mdown >> temp_checklist.mdown
 }
 
+alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+
 export PATH="$PATH:$HOME/.rvm/bin"
+
+source ~/.bash_aliases
