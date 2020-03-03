@@ -46,10 +46,32 @@ set splitbelow
 set splitright
 set mouse=a
 
-set rtp+=/usr/local/opt/fzf
-let g:fzf_layout = { 'down': '~20%' }
-
 let g:tmux_navigator_no_mappings = 1
+
+map <space> V
+
+map <leader>a <C-W><C-H>
+map <leader>s <C-W><C-J>
+map <leader>d <C-W><C-K>
+map <leader>f <C-W><C-L>
+
+
+nnoremap <silent> <leader>a :TmuxNavigateLeft<cr>
+nnoremap <silent> <leader>s :TmuxNavigateDown<cr>
+nnoremap <silent> <leader>d :TmuxNavigateUp<cr>
+nnoremap <silent> <leader>f :TmuxNavigateRight<cr>
+
+nnoremap <silent> <leader>ws w !sudo tee %<cr>
+nnoremap <leader>fa :Ack
+nnoremap <leader>cdev :cd ~/Development<CR>
+nnoremap <leader>v :Vex<CR>
+nnoremap <C-P> :FZF<CR>
+nnoremap <leader>S :call SplitWorkspaceFromCurrent()<CR>
+
+nnoremap <leader>+ :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 fun! <SID>StripTrailingWhitespaces()
   let l = line(".")
@@ -66,29 +88,6 @@ fun! SplitWorkspaceFromCurrent()
   endfor
   :vs db/schema.rb
 endfun
-
-map <space> V
-
-map <leader>a <C-W><C-H>
-map <leader>s <C-W><C-J>
-map <leader>d <C-W><C-K>
-map <leader>f <C-W><C-L>
-
-nnoremap <silent> <leader>a :TmuxNavigateLeft<cr>
-nnoremap <silent> <leader>s :TmuxNavigateDown<cr>
-nnoremap <silent> <leader>d :TmuxNavigateUp<cr>
-nnoremap <silent> <leader>f :TmuxNavigateRight<cr>
-
-nnoremap <leader>fa :Ack
-nnoremap <leader>cdev :cd ~/Development<CR>
-nnoremap <leader>v :Vex<CR>
-nnoremap <C-P> :FZF<CR>
-nnoremap <leader>S :call SplitWorkspaceFromCurrent()<CR>
-
-nnoremap <leader>+ :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
-nnoremap <leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
-
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 if executable('ag')
   let g:ackprg = 'ag --nogroup --nocolor --column'
