@@ -1,11 +1,13 @@
-export EDITOR='vim'
+export EDITOR='nvim' 
 export SPARK_HOME="/DeZyre/spark-2.4.5-bin-hadoop2.7"
 export PS1="${debian_chroot:+($debian_chroot)}\u@${HOSTNAME:0:11}:\w\$ "
 
 mkdir -p ~/Development
 
+alias vim='nvim'
+
 alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-alias tmux="TERM=screen-256color-bce tmux"
+alias tmux="TERM=xterm-256color tmux"
 
 # Ruby aliases
 alias be='bundle exec'

@@ -14,18 +14,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'ajmwagar/vim-deus'
   Plug 'junegunn/fzf'
   Plug 'rking/ag.vim'
+  Plug 'derekwyatt/vim-scala'
 call plug#end()
 
 filetype plugin indent on
-set t_Co=256
-set termguicolors
-set wildmode=full
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set background=dark
-syntax enable
-colorscheme monokai
-let g:airline_powerline_fonts = 1
 
 set shell=/bin/bash
 set swapfile
@@ -47,7 +39,14 @@ set splitbelow
 set splitright
 set mouse=a
 
-let g:tmux_navigator_no_mappings = 1
+set t_Co=256
+set termguicolors
+set wildmode=full
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set background=dark
+syntax enable
+colorscheme one
 
 map <space> V
 
@@ -55,7 +54,6 @@ map <leader>a <C-W><C-H>
 map <leader>s <C-W><C-J>
 map <leader>d <C-W><C-K>
 map <leader>f <C-W><C-L>
-
 
 nnoremap <silent> <leader>a :TmuxNavigateLeft<cr>
 nnoremap <silent> <leader>s :TmuxNavigateDown<cr>
@@ -74,6 +72,32 @@ nnoremap <leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
+if executable('ag')
+  let g:ackprg = 'ag --nogroup --nocolor --column'
+endif
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+let g:deoplete#enable_at_startup = 1
+let g:tmux_navigator_no_mappings = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='one'
+
+if (empty($TMUX))
+    if (has("nvim"))
+      let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    endif
+    if (has("termguicolors"))
+      set termguicolors
+    endif
+endif
+
 fun! <SID>StripTrailingWhitespaces()
   let l = line(".")
   let c = col(".")
@@ -89,10 +113,6 @@ fun! SplitWorkspaceFromCurrent()
   endfor
   :vs db/schema.rb
 endfun
-
-if executable('ag')
-  let g:ackprg = 'ag --nogroup --nocolor --column'
-endif
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 autocmd StdinReadPre * let s:std_in=1
