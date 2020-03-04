@@ -25,6 +25,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
 syntax enable
 colorscheme monokai
+let g:airline_powerline_fonts = 1
 
 set shell=/bin/bash
 set swapfile

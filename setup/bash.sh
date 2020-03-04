@@ -27,5 +27,7 @@ if [ "$RUN_ALL" == '1' ]; then
       done
   fi
 
+  curl -s "https://get.sdkman.io" | bash
+
 
 fi

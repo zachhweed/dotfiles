@@ -1,14 +1,16 @@
 export EDITOR='vim'
+export SPARK_HOME="/DeZyre/spark-2.4.5-bin-hadoop2.7"
+export PS1="${debian_chroot:+($debian_chroot)}\u@${HOSTNAME:0:11}:\w\$ "
 
 mkdir -p ~/Development
 
+alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias tmux="TERM=screen-256color-bce tmux"
 
 # Ruby aliases
 alias be='bundle exec'
 alias sdeploy='be cap staging deploy'
 alias sr='spring rspec'
-
 # Stores
 alias rs='redis-server --daemonize yes'
 
@@ -42,9 +44,6 @@ alias gs='git status'
 alias gd='git branch -D'
 alias grh='git reset --hard'
 
-function git-group() {
-  git diff master | grep "diff --git" | cut -d ' ' -f4- | awk 'match($0, /[controllers|views|models]\/.*\.(html|rb)/){ print substr($0, RSTART+1, RLENGTH-1) }' | sort
-}
 alias gg='git-group'
 
 # Tmux aliases
@@ -78,8 +77,15 @@ function build_pr_template() {
   cat ~/checklist.mdown >> temp_checklist.mdown
 }
 
-alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-
-export PATH="$PATH:$HOME/.rvm/bin"
+function git-group() {
+  git diff master | grep "diff --git" | cut -d ' ' -f4- | awk 'match($0, /[controllers|views|models]\/.*\.(html|rb)/){ print substr($0, RSTART+1, RLENGTH-1) }' | sort
+}
 
 source ~/.bash_aliases
+
+export SDKMAN_DIR="/home/zweed/.sdkman"
+[[ -s "/home/zweed/.sdkman/bin/sdkman-init.sh" ]] && source "/home/zweed/.sdkman/bin/sdkman-init.sh"
+
+export PATH="$PATH:$HOME/.rvm/bin"
+export PATH=$SPARK_HOME/bin:$PATH
+
