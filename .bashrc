@@ -1,6 +1,5 @@
-export EDITOR='nvim' 
+export EDITOR='nvim'
 export SPARK_HOME="/DeZyre/spark-2.4.5-bin-hadoop2.7"
-export PS1="${debian_chroot:+($debian_chroot)}\u@${HOSTNAME:0:11}:\w\$ "
 
 mkdir -p ~/Development
 

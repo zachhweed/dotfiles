@@ -4,8 +4,6 @@ if [ "$CONFIGURE_PYTHON" == '1' ] || [ "$RUN_ALL" == '1' ]; then
 
   # Media management (handled by python libraries)
 
-  pip3 install beets
-  pip3 install beets-copyartifacts
-  pip3 install --user --upgrade pynvim
+  pip3 install beets beets-copyartifacts pynvim msgpack
 
 fi
